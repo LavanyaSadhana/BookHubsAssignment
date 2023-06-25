@@ -20,7 +20,8 @@ const App = () => {
 
     }
 
-    render() {
+    render(){
+        
         const {favoriteList}=this.state
 
         return(
