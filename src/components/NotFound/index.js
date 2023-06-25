@@ -11,7 +11,7 @@ const NotFound = props => {
     <div className="not-found-container">
       <img
         src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687682032/pageNotFoundImage_uzs1dv.png"
-        className="not-found-image"
+        className="not-found-pic"
         alt="not found"
       />
       <h1 className="not-found-heading">Page Not Found</h1>

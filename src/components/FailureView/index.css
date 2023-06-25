@@ -1,0 +1,45 @@
+.failure-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .failure-container {
+    justify-content: flex-start;
+  }
+}
+
+.failure-pic {
+  height: 180px;
+  width: 400px;
+}
+@media screen and(max-width:767px) {
+  .failure-pic {
+    width: 250px;
+    height: 180px;
+  }
+}
+.failure-text {
+  font-family: 'inter';
+  font-size: 24px;
+  font-weight: 400;
+}
+@media screen and(max-width:767px) {
+  .failure-text {
+    font-size: 14px;
+    text-align: center;
+  }
+}
+.failure-button {
+  color: #ffffff;
+  background-color: #0284c7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
