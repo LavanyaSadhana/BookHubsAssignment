@@ -11,7 +11,7 @@ import Footer from '../Footer'
 
 import './index.css'
 
-const topRatedApiStatus = {
+const topRatedApiStatuses = {
   initial: 'INITIAL',
   success: 'SUCCESS',
   failure: 'FAILURE',
@@ -32,7 +32,7 @@ const settings = {
         slidesToScroll: 1,
       },
     },
-    +{
+    {
       breakpoint: 786,
       settings: {
         slidesToShow: 2,
@@ -43,19 +43,16 @@ const settings = {
 }
 
 class Home extends Component {
-  state = {
-    topRatedApiStatus: topRatedApiStatus.initial,
-    topRatedBooks: [],
-  }
+  state = {topRatedApiStatus: topRatedApiStatuses.initial, topRatedBooks: []}
 
   componentDidMount() {
     this.getTopRatedBooks()
   }
 
   getTopRatedBooks = async () => {
-    this.setState({topRatedApiStatus: topRatedApiStatus.inProgress})
+    this.setState({topRatedApiStatus: topRatedApiStatuses.inProgress})
 
-    const url = 'https://apis.ccbp.in/book-hub/top-rated-books'
+    const topRatedBooksApi = 'https://apis.ccbp.in/book-hub/top-rated-books'
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -63,23 +60,22 @@ class Home extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(url, options)
+    const response = await fetch(topRatedBooksApi, options)
     if (response.ok === true) {
       const fetchedData = await response.json()
       const booksList = fetchedData.books
-      const updatedData = booksList.map(each => ({
-        id: each.id,
-        authorName: each.author_name,
-        coverPic: each.cover_pic,
-        title: each.title,
-        price: each.price,
+      const updatedData = booksList.map(eachBook => ({
+        id: eachBook.id,
+        authorName: eachBook.author_name,
+        coverPic: eachBook.cover_pic,
+        title: eachBook.title,
       }))
       this.setState({
-        topRatedApiStatus: topRatedApiStatus.success,
+        topRatedApiStatus: topRatedApiStatuses.success,
         topRatedBooks: updatedData,
       })
     } else {
-      this.setState({topRatedApiStatus: topRatedApiStatus.failure})
+      this.setState({topRatedApiStatus: topRatedApiStatuses.failure})
     }
   }
 
@@ -159,12 +155,12 @@ class Home extends Component {
     const {topRatedApiStatus} = this.state
 
     switch (topRatedApiStatus) {
-      case topRatedApiStatus.success:
+      case topRatedApiStatuses.success:
         return <>{this.renderSliderSuccessView()}</>
-      case topRatedApiStatus.inProgress:
+      case topRatedApiStatuses.inProgress:
         return <>{this.renderSliderProgressView()}</>
-      case topRatedApiStatus.failure:
-        return <>{this.renderSliderFailureView()}</>
+      case topRatedApiStatuses.failure:
+        return <> {this.renderSliderViewFailure()}</>
       default:
         return null
     }
@@ -173,7 +169,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Header home shelves favorite />
+        <Header home />
         <div className="home-page-bg-container">
           <h1 className="home-heading" key="title">
             Find Your Next Favorite Books?
@@ -184,24 +180,26 @@ class Home extends Component {
             recommendations.
           </p>
           <button
+            className="home-find-books-btn books-responsive-btn-sm"
             type="button"
             onClick={this.onClickFindBooks}
-            className="home-find-books-btn books-responsive-btn-sm"
           >
             Find Books
           </button>
-          <div className="home-top-rated-container">
-            <div className="top-rated-heading-container">
-              <h1 className="top-rated-heading">Top Rated Books</h1>
-              <button
-                className="home-find-books-btn books-responsive-btn-lg"
-                type="button"
-                onClick={this.onClickFindBooks}
-              >
-                Find Books
-              </button>
+          <div>
+            <div className="home-top-rated-container">
+              <div className="top-rated-heading-container">
+                <h1 className="top-rated-heading">Top Rated Books</h1>
+                <button
+                  className="home-find-books-btn books-responsive-btn-lg"
+                  type="button"
+                  onClick={this.onClickFindBooks}
+                >
+                  Find Books
+                </button>
+              </div>
+              <div className="slick-container">{this.renderSlider()}</div>
             </div>
-            <div className="slick-container">{this.renderSlider()}</div>
           </div>
         </div>
         <Footer />
@@ -209,4 +207,5 @@ class Home extends Component {
     )
   }
 }
+
 export default Home

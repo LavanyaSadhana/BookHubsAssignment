@@ -10,7 +10,9 @@ class Header extends Component {
   state = {displayNavbar: false}
 
   onClickMenu = () => {
-    this.setState(prevState => ({displayNavbar: !prevState.displayNavbar}))
+    this.setState(prevState => ({
+      displayNavbar: !prevState.displayNavbar,
+    }))
   }
 
   onClickCross = () => {
@@ -19,8 +21,13 @@ class Header extends Component {
 
   onClickLogout = () => {
     const {history} = this.props
-    history.replace('/')
+    history.replace('/login')
     Cookies.remove('jwt_token')
+  }
+
+  onClickWebSiteLogo = () => {
+    const {history} = this.props
+    history.push('/')
   }
 
   render() {
@@ -29,15 +36,16 @@ class Header extends Component {
     const activeShelves = shelves ? 'active-tab' : ''
     const activeFavorite = favorite ? 'active-tab' : ''
     const {displayNavbar} = this.state
+
     return (
       <div>
         <div className="header-container">
-          <div className="header-website-logo">
-            <Link className="link" to="/">
+          <div className="header-website-logo1">
+            <Link to="/">
               <>
                 <img
-                  src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687689738/Logo_skg9bp.png"
                   className="header-website-logo"
+                  src="https://res.cloudinary.com/dkxxgpzd8/image/upload/v1647190320/Group_7731_v0p1nt_gjeokw.png"
                   alt="website logo"
                 />
               </>
@@ -45,19 +53,25 @@ class Header extends Component {
           </div>
           <ul className="tabs-container">
             <Link className="link" to="/">
-              <li className="list-item">Home</li>
+              <li className={`list-item bookshelves-tab ${activeHome}`}>
+                Home
+              </li>
             </Link>
-            <Link className="link" to="/">
-              <li className="list-item">BookShelves</li>
+            <Link className="link" to="/shelf">
+              <li className={`list-item bookshelves-tab ${activeShelves}`}>
+                Bookshelves
+              </li>
             </Link>
-            <Link className="link" to="/">
-              <li className="list-item">MyFavorites</li>
+            <Link className="link" to="/favorites">
+              <li className={`list-item bookshelves-tab ${activeFavorite}`}>
+                MyFavorites
+              </li>
             </Link>
             <li className="list-item">
               <button
-                type="button"
                 onClick={this.onClickLogout}
                 className="logout-btn"
+                type="button"
               >
                 Logout
               </button>
@@ -68,15 +82,15 @@ class Header extends Component {
           <div className="header-nav-container">
             <Link to="/">
               <img
-                src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687689738/Logo_skg9bp.png"
                 className="header-nav-bar-website-logo"
+                src="https://res.cloudinary.com/dkxxgpzd8/image/upload/v1647190320/Group_7731_v0p1nt_gjeokw.png"
                 alt="website logo"
               />
             </Link>
             <button
-              type="button"
               onClick={this.onClickMenu}
               className="cross-icon-btn"
+              type="button"
             >
               <FiMenu className="menu-icon" />
             </button>
@@ -121,4 +135,5 @@ class Header extends Component {
     )
   }
 }
+
 export default withRouter(Header)

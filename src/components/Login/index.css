@@ -14,30 +14,31 @@
     justify-content: flex-start;
   }
 }
-.login-mobile-image {
-  width: 200px;
+
+.login-website-logo-mobile-image {
+  width: 165px;
+  margin-top: 50px;
+  margin-bottom: 35px;
   border-radius: 50%;
-  margin-top: 32px;
-  margin-bottom: 20px;
 }
 @media screen and (min-width: 992px) {
-  .login-mobile-image {
+  .login-website-logo-mobile-image {
     display: none;
     border-radius: none;
   }
 }
 
-@media screen and(max-width:991px) {
-  .login-image {
-    display: none;
-  }
+.login-image {
+  width: 200px;
+  margin-left: 50px;
 }
 @media screen and (min-width: 992px) {
   .login-image {
     width: 50vw;
-    height: 100vh;
+    height: 90vh;
   }
 }
+
 .form-main-container {
   display: flex;
   justify-content: center;
@@ -49,9 +50,16 @@
     width: 100vw;
   }
 }
+
 .login-website-logo-desktop-image {
   width: 185px;
 }
+@media screen and (max-width: 991px) {
+  .login-image {
+    display: none;
+  }
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -60,6 +68,7 @@
   border-radius: 8px;
   width: 100%;
 }
+
 @media screen and (min-width: 992px) {
   .form-container {
     width: 350px;
@@ -73,24 +82,30 @@
 .input-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin-top: 20px;
+  width: 100%;
 }
+
 .input-label {
-  color: #475569;
-  font-weight: 500;
-  font-family: 'roboto';
   margin-bottom: 0px;
+  font-family: 'Roboto';
+  font-weight: bold;
+  line-height: 16px;
+  color: #475569;
 }
+
 .input-field {
-  font-size: 16px;
-  height: 45px;
+  font-size: 14px;
+  height: 40px;
   border: 1px solid #d7dfe9;
   background-color: #e2e8f0;
+  color: #64748b;
   border-radius: 2px;
-  padding: 10px;
+  margin-top: 5px;
+  padding: 8px 16px 8px 16px;
   outline: none;
 }
+
 .login-button {
   font-family: 'Roboto';
   font-weight: bold;
@@ -106,11 +121,13 @@
   outline: none;
   cursor: pointer;
 }
+
 .error-message {
   align-self: flex-start;
   font-size: 12px;
-  color: #ff0b37;
-  margin-bottom: 0px;
+  font-family: 'Roboto';
   margin-top: 3px;
-  font-family: 'roboto';
+  margin-bottom: 0px;
+  color: #ff0b37;
+  line-height: 16px;
 }

@@ -7,61 +7,7 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Login extends Component {
-  state = {
-    username: '',
-    password: '',
-    showSubmitError: false,
-    errorMsg: '',
-  }
-
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
-  }
-
-  onChangeUsername = event => {
-    this.setState({username: event.target.value})
-  }
-
-  renderPassword = () => {
-    const {password} = this.state
-
-    return (
-      <>
-        <label className="input-label" htmlFor="password">
-          Password*
-        </label>
-
-        <input
-          type="password"
-          value={password}
-          onChange={this.onChangePassword}
-          className="input-field"
-          placeholder="Password"
-          id="password"
-        />
-      </>
-    )
-  }
-
-  renderUsername = () => {
-    const {username} = this.state
-
-    return (
-      <>
-        <label className="input-label" htmlFor="username">
-          Username*
-        </label>
-        <input
-          type="text"
-          value={username}
-          onChange={this.onChangeUsername}
-          className="input-field"
-          placeholder="Username"
-          id="username"
-        />
-      </>
-    )
-  }
+  state = {username: '', password: '', showSubmitError: false, errorMsg: ''}
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
@@ -79,16 +25,62 @@ class Login extends Component {
     const userDetails = {username, password}
     const apiUrl = 'https://apis.ccbp.in/login'
     const options = {
-      method: 'GET',
+      method: 'POST',
       body: JSON.stringify(userDetails),
     }
-    const response = fetch(apiUrl, options)
+    const response = await fetch(apiUrl, options)
     const data = await response.json()
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
       this.onSubmitFailure(data.error_msg)
     }
+  }
+
+  onChangePassword = event => {
+    this.setState({password: event.target.value})
+  }
+
+  onChangeUsername = event => {
+    this.setState({username: event.target.value})
+  }
+
+  renderPasswordField = () => {
+    const {password} = this.state
+    return (
+      <>
+        <label className="input-label" htmlFor="password">
+          Password*
+        </label>
+        <input
+          type="password"
+          id="password"
+          className="input-field"
+          placeholder="Password"
+          value={password}
+          onChange={this.onChangePassword}
+        />
+      </>
+    )
+  }
+
+  renderUsernameField = () => {
+    const {username} = this.state
+    return (
+      <>
+        <label className="input-label" htmlFor="username">
+          Username*
+        </label>
+        <input
+          type="text"
+          id="username"
+          className="input-field"
+          placeholder="Username"
+          value={username}
+          onChange={this.onChangeUsername}
+        />
+      </>
+    )
   }
 
   render() {
@@ -101,24 +93,24 @@ class Login extends Component {
     return (
       <div className="login-form-container">
         <img
-          src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687675772/LoginBackgroundImage_hjcrph.jpg"
-          className="login-mobile-image"
-          alt="Book Login"
+          src="https://res.cloudinary.com/dwtsapuyn/image/upload/v1645073768/bookhub-image_ubswwx.png"
+          alt="login website logo"
+          className="login-website-logo-mobile-image"
         />
         <img
-          src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687675772/LoginBackgroundImage_hjcrph.jpg"
+          src="https://res.cloudinary.com/dwtsapuyn/image/upload/v1645073768/bookhub-image_ubswwx.png"
+          alt="website login"
           className="login-image"
-          alt="Book Login"
         />
         <div className="form-main-container">
           <form className="form-container" onSubmit={this.onSubmitForm}>
             <img
-              src="https://res.cloudinary.com/dvlheapjz/image/upload/v1687675772/LoginBackgroundImage_hjcrph.jpg"
+              src="https://res.cloudinary.com/dwtsapuyn/image/upload/v1645077666/book-hub-logo_dy4szt.png"
               alt="website logo"
               className="login-website-logo-desktop-image"
             />
-            <div className="input-container">{this.renderUsername()}</div>
-            <div className="input-container">{this.renderPassword()}</div>
+            <div className="input-container">{this.renderUsernameField()}</div>
+            <div className="input-container">{this.renderPasswordField()}</div>
             <button type="submit" className="login-button">
               Login
             </button>
