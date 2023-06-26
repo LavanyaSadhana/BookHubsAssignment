@@ -86,3 +86,9 @@
 .active-tab {
   border-bottom: solid 3px;
 }
+@media screen and(max-width:786px) {
+  .header-navbar-responsive-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

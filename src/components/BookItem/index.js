@@ -49,6 +49,7 @@ const BookItem = props => {
               <p className="book-item-status-heading">
                 Status: <span className="book-item-status">{readStatus}</span>
               </p>
+
               <input
                 className="favorite-input"
                 onChange={onChangeFavorite}

@@ -62,7 +62,7 @@ class Header extends Component {
                 Bookshelves
               </li>
             </Link>
-            <Link className="link" to="/favorites">
+            <Link className="link" to="/favorite">
               <li className={`list-item bookshelves-tab ${activeFavorite}`}>
                 MyFavorites
               </li>
@@ -106,7 +106,7 @@ class Header extends Component {
                     BookShelves
                   </h1>
                 </Link>
-                <Link className="link" to="/favorites">
+                <Link className="link" to="/favorite">
                   <h1 className={`bookshelves-tab ${activeFavorite}`}>
                     MyFavorites
                   </h1>
